@@ -52,7 +52,7 @@ Note: If you see the error, "`gpg: invalid option "--full-gen-key"`," try
 $ gpg --gen-key --expert
 ```
 
-The first prompt will ask for the type of key desired.  This is an RSA sign-only key: 
+The first prompt will ask for the type of key desired.  This is an RSA sign-only key:
 
 ```
 gpg (GnuPG) 2.0.27; Copyright (C) 2015 Free Software Foundation, Inc.
@@ -105,9 +105,9 @@ Key expires at Sat May 28 15:08:05 2016 PDT
 Is this correct? (y/N) y
 ```
 
-Now, enter your personal info. 
+Now, enter your personal info.
 
-This is for the primary user id (later, secondary user ids can be added): 
+This is for the primary user id (later, secondary user ids can be added):
 
 ```
 GnuPG needs to construct a user ID to identify your key.
@@ -124,11 +124,11 @@ Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? O
 Finally, enter a strong password (12+ character length, including lower/upper
 case letters, numbers, and special characters) and the master key generation
 will be complete.  This password will be used for signing other keys,
-revocation, and further manipulation of your key (and its subkeys). 
+revocation, and further manipulation of your key (and its subkeys).
 
 When the Security Token is set up you likely won't need this password for daily
 operation but it should be maintained in your brain. You could also store only
-part of the password in memory, and a long complex part in a usb drive in a 
+part of the password in memory, and a long complex part in a usb drive in a
 secure location.
 
 ```
@@ -153,7 +153,7 @@ uid       [ultimate] Some Person <some.person@gmail.com>
 
 Note that this key cannot be used for encryption.  You may want to use
 the command "--edit-key" to generate a subkey for this purpose.
- 
+
 gpg> save
 ```
 
@@ -164,7 +164,7 @@ manipulate your key (adding user ids, adding subkeys, etc):
 pub   4096R/B44C2E4A 2015-05-29 [expires: 2016-05-28]
 ```
 
-The key id in this example is B44C2E4A. 
+The key id in this example is B44C2E4A.
 
 Alternatively, you can retrieve it with a gpg command
 
@@ -227,21 +227,21 @@ pub  4096R/B44C2E4A  created: 2015-05-29  expires: 2016-05-28  usage: SC
                      trust: ultimate      validity: ultimate
 [ultimate] (1)* Some Person <some.person@company.com>
 [ unknown] (2). Some Person <some.person@gmail.com>
-A selected user is indicated with an asterisk: "*".  The uid command toggles users into a "selected" state and can select multiple users, so be careful.  Now set the selected user to "primary" and unselect the user to show the primary state: 
+A selected user is indicated with an asterisk: "*".  The uid command toggles users into a "selected" state and can select multiple users, so be careful.  Now set the selected user to "primary" and unselect the user to show the primary state:
 gpg> primary
 
 pub  4096R/B44C2E4A  created: 2015-05-29  expires: 2016-05-28  usage: SC  
                      trust: ultimate      validity: ultimate
 [ultimate] (1)* Some Person <some.person@company.com>
 [ unknown] (2)  Some Person <some.person@gmail.com>
- 
+
 gpg> uid 1
- 
+
 pub  4096R/B44C2E4A  created: 2015-05-29  expires: 2016-05-28  usage: SC  
                      trust: ultimate      validity: ultimate
 [ultimate] (1). Some Person <some.person@company.com>
 [ unknown] (2)  Some Person <some.person@gmail.com>
- 
+
 gpg> save
 ```
 
@@ -268,7 +268,7 @@ Please select the reason for the revocation:
 (Probably you want to select 1 here)
 Your decision? 1
 Enter an optional description; end it with an empty line:
-> 
+>
 Reason for revocation: Key has been compromised
 (No description given)
 Is this okay? (y/N) y
@@ -282,7 +282,7 @@ Revocation certificate created.
 ```
 Please move it to the backup medium created earlier which you can hide away;
 if a bad actor gets access to this certificate he can use it to make your key
-unusable, and potentially manipulate people into trusting a new fake key he 
+unusable, and potentially manipulate people into trusting a new fake key he
 created for you instead.
 
 It is not a bad idea to print this certificate and store it away, just in case
@@ -298,10 +298,10 @@ Three subkeys are needed for full GPG support of a Security Token:
  * Authentication key
 
 These subkeys will be removed from the keypair and placed onto the Security
-Token. 
+Token.
 
 The following assume that the above sections have been completed, and continues
-the examples in those sections. 
+the examples in those sections.
 
 To start, edit the key in "Expert mode" so that there is more control in the
 key creation process:
@@ -380,7 +380,7 @@ pub  4096R/B44C2E4A  created: 2015-05-29  expires: 2016-05-28  usage: SC
 sub  4096R/458785FA  created: 2015-06-01  expires: 2016-05-31  usage: S   
 [ultimate] (1). Some Person <some.person@company.com>
 [ultimate] (2)  Some Person <some.person@gmail.com>
- 
+
 gpg> save
 ```
 
@@ -430,7 +430,7 @@ sub  4096R/458785FA  created: 2015-06-01  expires: 2016-05-31  usage: S
 sub  4096R/25238CF1  created: 2015-06-01  expires: 2016-05-31  usage: E   
 [ultimate] (1). Some Person <some.person@company.com>
 [ultimate] (2)  Some Person <some.person@gmail.com>
- 
+
 gpg> save
 ```
 
@@ -453,8 +453,8 @@ Please select what kind of key you want:
    (8) RSA (set your own capabilities)
 Your selection? 8
 
-Possible actions for a RSA key: Sign Encrypt Authenticate 
-Current allowed actions: Sign Encrypt 
+Possible actions for a RSA key: Sign Encrypt Authenticate
+Current allowed actions: Sign Encrypt
 
    (S) Toggle the sign capability
    (E) Toggle the encrypt capability
@@ -463,8 +463,8 @@ Current allowed actions: Sign Encrypt
 
 Your selection? s
 
-Possible actions for a RSA key: Sign Encrypt Authenticate 
-Current allowed actions: Encrypt 
+Possible actions for a RSA key: Sign Encrypt Authenticate
+Current allowed actions: Encrypt
 
    (S) Toggle the sign capability
    (E) Toggle the encrypt capability
@@ -473,8 +473,8 @@ Current allowed actions: Encrypt
 
 Your selection? e
 
-Possible actions for a RSA key: Sign Encrypt Authenticate 
-Current allowed actions: 
+Possible actions for a RSA key: Sign Encrypt Authenticate
+Current allowed actions:
 
 
    (S) Toggle the sign capability
@@ -484,8 +484,8 @@ Current allowed actions:
 
 Your selection? a
 
-Possible actions for a RSA key: Sign Encrypt Authenticate 
-Current allowed actions: Authenticate 
+Possible actions for a RSA key: Sign Encrypt Authenticate
+Current allowed actions: Authenticate
 
    (S) Toggle the sign capability
    (E) Toggle the encrypt capability
@@ -526,7 +526,7 @@ sub  4096R/25238CF1  created: 2015-06-01  expires: 2016-05-31  usage: E
 sub  4096R/156CA250  created: 2015-06-01  expires: 2016-05-31  usage: A   
 [ultimate] (1). Some Person <some.person@company.com>
 [ultimate] (2)  Some Person <some.person@gmail.com>
- 
+
 gpg> save
 ```
 
@@ -539,9 +539,9 @@ $ gpg -a --export-secret-keys B44C2E4A > /Media/UsbStick/pgp/B44C2E4A.master.asc
 $ gpg -a --export-secret-subkeys B44C2E4A > /Media/UsbStick/pgp/B44C2E4A.subkeys.asc
 $ gpg -a --export B44C2E4A > /Media/UsbStick/pgp/B44C2E4A.public.asc
 ```
- 
+
 ## Write Subkeys to Security Token
- 
+
 This is a destructive operation as it will leave only non-secret "stubs" in
 your current .gnupg directory.
 
@@ -708,6 +708,21 @@ ssb  4096R/156CA250  created: 2015-06-01  expires: never
 gpg> save
 ```
 
+If you're only setting up one hardware token, you're all done. If you have more to set up, follow the steps in the next section.
+
+### Writing to Multiple Security Tokens
+Now that you have imported your keys onto a Security Token, it's time to set up some redundancy. This part of the guide assumes that you will be attempting to import the same subkeys onto an identical hardware token.
+
+Delete the keys from your keyring so you can import onto another card:
+
+```bash
+$ gpg --delete-secret-keys B44C2E4A
+$ gpg --delete-keys B44C2E4A
+$ gpg --import /Media/UsbStick/pgp/B44C2E4A.master.asc
+```
+
+Now, the keys have no record of having been uploaded to a hardware token. Repeat the same steps for placing the keys on the token starting from Write `Subkeys to Security Token`.
+
 ## Cleanup
 
 The following is critical to ensure no private keys are left on disk, and that
@@ -727,7 +742,7 @@ $ gpg --card-status
 $ gpg --edit-key B44C2E4A
 ```
 
-``` 
+```
 gpg (GnuPG) 2.0.27; Copyright (C) 2015 Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
@@ -756,6 +771,6 @@ checking fingerprints from different sources...)?
  m = back to the main menu
 
 Your decision? 5
- 
+
 gpg> quit
 ```
