@@ -32,7 +32,7 @@ Here we will assume /Media/UsbStick
 
 In the terminal, create a new directory on this device:
 
-```
+```bash
 $ mkdir /Media/UsbStick/pgp
 ```
 
@@ -42,8 +42,14 @@ This important key will be used to sign other keys and for generation of the
 subkeys that are needed for the Security Token.  This tutorial will start by
 generating a new key in "Expert mode" to allow the needed customization.
 
-```
+```bash
 $ gpg --full-gen-key --expert
+```
+
+Note: If you see the error, "`gpg: invalid option "--full-gen-key"`," try
+
+```bash
+$ gpg --gen-key --expert
 ```
 
 The first prompt will ask for the type of key desired.  This is an RSA sign-only key: 
@@ -162,8 +168,11 @@ The key id in this example is B44C2E4A.
 
 Alternatively, you can retrieve it with a gpg command
 
+```bash
+$ gpg --list-keys
 ```
-# gpg --list-keys
+
+```
 /Users/some.person/.gnupg/pubring.gpg
 --------------------------------
 pub   4096R/B44C2E4A 2015-05-29 [expires: 2016-05-28]
@@ -174,8 +183,11 @@ uid       [ultimate] Some Person <some.person@company.com>
 
 Add any other relevant user ids using the adduid command in the GPG console:
 
+```bash
+$ gpg --edit-key B44C2E4A
 ```
-# gpg --edit-key B44C2E4A
+
+```
 gpg (GnuPG) 2.0.27; Copyright (C) 2015 Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
@@ -239,9 +251,11 @@ If your keys are compromised for any reason you will need a revocation
 certificate to revoke (untrust) your keys.  Generate the revocation certificate
 and save it in the safe place created earlier:
 
-```
+```bash
 $ gpg --output /Media/UsbStick/pgp/revocation-certificate.txt --gen-revoke B44C2E4A
+```
 
+```
 sec  4096R/B44C2E4A 2015-05-29 Some Person <some.person@company.com>
 
 Create a revocation certificate for this key? (y/N) y
@@ -292,9 +306,11 @@ the examples in those sections.
 To start, edit the key in "Expert mode" so that there is more control in the
 key creation process:
 
-```
+```bash
 $ gpg --edit-key --expert B44C2E4A
+```
 
+```
 gpg (GnuPG) 2.0.27; Copyright (C) 2015 Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
@@ -518,7 +534,7 @@ gpg> save
 
 Now backup your keys to your previously created offline storage directory:
 
-```
+```bash
 $ gpg -a --export-secret-keys B44C2E4A > /Media/UsbStick/pgp/B44C2E4A.master.asc
 $ gpg -a --export-secret-subkeys B44C2E4A > /Media/UsbStick/pgp/B44C2E4A.subkeys.asc
 $ gpg -a --export B44C2E4A > /Media/UsbStick/pgp/B44C2E4A.public.asc
@@ -529,8 +545,11 @@ $ gpg -a --export B44C2E4A > /Media/UsbStick/pgp/B44C2E4A.public.asc
 This is a destructive operation as it will leave only non-secret "stubs" in
 your current .gnupg directory.
 
+```bash
+$ gpg --edit-key B44C2E4A
 ```
-gpg --edit-key B44C2E4A
+
+```
 gpg (GnuPG) 2.0.27; Copyright (C) 2015 Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
@@ -700,13 +719,15 @@ serves as a good test.
 We opt for a "clean room" approach here to ensure you could use your key as
 expected on a new system.
 
-```
+```bash
 $ rm .gnupg -rf
 $ killall gpg-agent
 $ gpg --import /Media/UsbStick/pgp/B44C2E4A.public.asc
 $ gpg --card-status
 $ gpg --edit-key B44C2E4A
- 
+```
+
+``` 
 gpg (GnuPG) 2.0.27; Copyright (C) 2015 Free Software Foundation, Inc.
 This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
